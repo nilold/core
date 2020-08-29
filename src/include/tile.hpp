@@ -1,17 +1,32 @@
 #pragma once
+#include <Crop.hpp>
+#include <Agent.hpp>
+#include <memory>
 
 namespace core
 {
-    struct pos { unsigned x, y; };
+    using CropPtr = std::shared_ptr<Crop>;
     class Tile
     {
-        public:
-        Tile(unsigned x, unsigned y): m_pos{x, y}{}
+    public:
+        Tile(unsigned x, unsigned y) : m_x{x}, m_y{y} {}
         ~Tile() = default;
-        Tile(const Tile&) = delete;
-        Tile(const Tile&&) = delete;
+        Tile(const Tile &) = delete;
+        Tile(Tile &&tile) : m_x(tile.m_x), m_y(tile.m_y), m_crop(tile.m_crop) {}
 
-        private:
-        struct pos m_pos{0, 0};
+        Tile &operator=(Tile &o) = delete;
+        Tile &operator=(Tile &&o) = default;
+
+        void setCrop(CropPtr &crop) { m_crop = crop; }
+        // CropPtr getCrop() { return m_crop; }
+
+        bool contamine(std::shared_ptr<Agent> agent)
+        {
+            return m_crop ? m_crop->tryInffection(agent) : false;
+        }
+
+    private:
+        unsigned m_x, m_y;
+        CropPtr m_crop;
     };
-}
+} // namespace core
