@@ -18,7 +18,7 @@ namespace core
         Tile &operator=(Tile &&o) = default;
 
         void setCrop(CropPtr &crop) { m_crop = crop; }
-        // CropPtr getCrop() { return m_crop; }
+        CropPtr getCrop() { return m_crop; }
 
         bool contamine(std::shared_ptr<Agent> agent)
         {

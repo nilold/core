@@ -46,6 +46,6 @@ namespace core
 
     void Inffectable::suffer() noexcept
     {
-
+        
     }
 } // namespace core

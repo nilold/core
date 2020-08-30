@@ -33,9 +33,32 @@ namespace core
     {
 
     public:
-        Organism() : Inffectable(), m_minerals(nutrients::M_COUNT), m_vitamins(nutrients::V_COUNT){};
+        Organism() : Inffectable(), m_minerals(nutrients::M_COUNT, 0), m_vitamins(nutrients::V_COUNT, 0){};
         Organism(Organism &&o) : m_minerals(std::move(o.m_minerals)), m_vitamins(std::move(o.m_vitamins)) {}
         ~Organism() = default;
+
+        Organism &withK(quantity_t quantity)
+        {
+            m_minerals[nutrients::Minerals::K] = 0;
+            addMineral(nutrients::Minerals::K, quantity);
+            return *this;
+        }
+
+        Organism &withNa(quantity_t quantity)
+        {
+            m_minerals[nutrients::Minerals::Na] = 0;
+            addMineral(nutrients::Minerals::Na, quantity);
+            return *this;
+        }
+
+        Organism &withFe(quantity_t quantity)
+        {
+            m_minerals[nutrients::Minerals::Fe] = 0;
+            addMineral(nutrients::Minerals::Fe, quantity);
+            return *this;
+        }
+
+        //TODO:: add others
 
         void addMineral(int type, quantity_t quantity) //TODO: think about quantities vs concentration
         {
@@ -60,11 +83,18 @@ namespace core
             return quantity;
         }
 
+        quantity_t getMineral(int type) const
+        {
+            if (!mineralTypeIsValid(type))
+                return 0;
+            return m_minerals[type];
+        }
+
     private:
         std::vector<quantity_t> m_minerals;
         std::vector<quantity_t> m_vitamins;
 
-        bool mineralTypeIsValid(int type)
+        bool mineralTypeIsValid(int type) const
         {
             bool valid = type >= 0 && type < nutrients::M_COUNT;
             if (!valid)
