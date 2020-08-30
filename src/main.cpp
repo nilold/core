@@ -1,5 +1,5 @@
 #include <Tile.hpp>
-#include <Agent.hpp>
+#include <Bacteria.hpp>
 #include <Crop.hpp>
 
 #include <iostream>
@@ -17,8 +17,8 @@ int main(int argc, char *argv[])
     crop1->withK(100).withNa(100).withFe(100);
     field[0][0].setCrop(crop1);
 
-    auto agent1 = std::make_shared<core::Agent>("Fungus");
-    auto agent2 = std::make_shared<core::Agent>("Bacteria");
+    auto agent1 = std::make_shared<core::Bacteria>("bac1");
+    auto agent2 = std::make_shared<core::Bacteria>("bac2");
 
     std::cout << field[0][0].contamine(agent1);
     std::cout << field[0][0].contamine(agent2);

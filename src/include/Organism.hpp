@@ -7,99 +7,126 @@
 
 namespace core
 {
-    using quantity_t = int;
-
     namespace nutrients
     {
-        enum Minerals
+        using quantity_t = int;
+
+        enum class Minerals
         {
             K,
             Na,
             Fe,
             N,
-            M_COUNT
+            COUNT
         };
 
-        enum Vitamins
+        enum class Vitamins
         {
             A,
             B,
             C,
-            V_COUNT
+            COUNT
         };
+
     } // namespace nutrients
+
+    using nutrients::quantity_t;
 
     class Organism : public Inffectable
     {
 
     public:
-        Organism() : Inffectable(), m_minerals(nutrients::M_COUNT, 0), m_vitamins(nutrients::V_COUNT, 0){};
+        Organism() : Inffectable(),
+                     m_minerals(static_cast<int>(nutrients::Minerals::COUNT)),
+                     m_vitamins(static_cast<int>(nutrients::Vitamins::COUNT)){};
         Organism(Organism &&o) : m_minerals(std::move(o.m_minerals)), m_vitamins(std::move(o.m_vitamins)) {}
         ~Organism() = default;
+        Organism(const Organism& o) = delete;
 
         Organism &withK(quantity_t quantity)
         {
-            m_minerals[nutrients::Minerals::K] = 0;
-            addMineral(nutrients::Minerals::K, quantity);
+            (*this)[nutrients::Minerals::K] = quantity;
             return *this;
         }
 
         Organism &withNa(quantity_t quantity)
         {
-            m_minerals[nutrients::Minerals::Na] = 0;
-            addMineral(nutrients::Minerals::Na, quantity);
+            (*this)[nutrients::Minerals::Na] = quantity;
             return *this;
         }
 
         Organism &withFe(quantity_t quantity)
         {
-            m_minerals[nutrients::Minerals::Fe] = 0;
-            addMineral(nutrients::Minerals::Fe, quantity);
+            (*this)[nutrients::Minerals::Fe] = quantity;
             return *this;
         }
 
-        //TODO:: add others
-
-        void addMineral(int type, quantity_t quantity) //TODO: think about quantities vs concentration
+        Organism &withN(quantity_t quantity)
         {
-            if (mineralTypeIsValid(type))
-                m_minerals[type] += quantity;
+            (*this)[nutrients::Minerals::N] = quantity;
+            return *this;
         }
 
-        quantity_t takeMineral(int type, quantity_t quantity)
+        template <class Nutrient_t>
+        void addNutrient(Nutrient_t type, quantity_t quantity) //TODO: think about quantities vs concentration
         {
-            if (!mineralTypeIsValid(type))
-                return 0;
+            if (type != Nutrient_t::COUNT)
+                (*this)[type] += quantity;
+        }
 
-            if (m_minerals[type] > quantity)
+        template <class Nutrient_t>
+        quantity_t takeNutrient(Nutrient_t type, quantity_t quantity)
+        {
+            checkNutrientIndex(type);
+
+            if ((*this)[type] > quantity)
             {
-                m_minerals[type] -= quantity;
+                (*this)[type] -= quantity;
             }
             else
             {
-                quantity = m_minerals[type];
-                m_minerals[type] = 0;
+                quantity = (*this)[type];
+                (*this)[type] = 0;
             }
             return quantity;
         }
 
-        quantity_t getMineral(int type) const
+        template <class Nutrient_t>
+        const quantity_t &getNutrient(Nutrient_t type) const
         {
-            if (!mineralTypeIsValid(type))
-                return 0;
-            return m_minerals[type];
+            return (*this)[type];
         }
 
     private:
+        quantity_t &operator[](nutrients::Minerals typeIdx)
+        {
+            int idx = static_cast<int>(typeIdx);
+            return m_minerals[idx];
+        }
+        const quantity_t &operator[](nutrients::Minerals typeIdx) const
+        {
+            int idx = static_cast<int>(typeIdx);
+            return m_minerals[idx];
+        }
+        quantity_t &operator[](nutrients::Vitamins typeIdx)
+        {
+            int idx = static_cast<int>(typeIdx);
+            return m_vitamins[idx];
+        }
+        const quantity_t &operator[](nutrients::Vitamins typeIdx) const
+        {
+            int idx = static_cast<int>(typeIdx);
+            return m_vitamins[idx];
+        }
+
+        template <class Nutrient_t>
+        static void checkNutrientIndex(Nutrient_t type) noexcept
+        {
+            if (type >= Nutrient_t::COUNT)
+                std::cerr << "\nERROR: trying to get invalid nutrient Index.\n";
+        }
+
         std::vector<quantity_t> m_minerals;
         std::vector<quantity_t> m_vitamins;
-
-        bool mineralTypeIsValid(int type) const
-        {
-            bool valid = type >= 0 && type < nutrients::M_COUNT;
-            if (!valid)
-                std::cerr << "Invalid mineral type: " << type << std::endl;
-            return valid;
-        }
     };
 } // namespace core
