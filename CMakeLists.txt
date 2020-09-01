@@ -4,8 +4,6 @@ project(farmer-core)
 set(CMAKE_CXX_STANDARD 20)
 
 include_directories(${CMAKE_HOME_DIRECTORY}/src/include)
-message("=================================================")
-message("${CMAKE_HOME_DIRECTORY}/src/include")
 add_subdirectory(src)
 
 # Testing
