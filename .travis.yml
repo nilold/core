@@ -59,6 +59,7 @@ script:
     ############################################################################
     # Download gtest
     ############################################################################
+    - echo "Downloading gtest"
     - mkdir -p external/include
     - cd external/include
     - git clone https://github.com/google/googletest.git
@@ -67,14 +68,14 @@ script:
     ############################################################################
     # Build main and tests
     ############################################################################
-     - mkdir -p build
-     - cd build
-     # - cmake -DCMAKE_BUILD_TYPE=Coverage .. 
-     - cmake -DCMAKE_BUILD_TYPE=Coverage .. 
-     - make
-     # - make project1_coverage
-     - ctest
+    - mkdir -p build
+    - cd build
+    # - cmake -DCMAKE_BUILD_TYPE=Coverage .. 
+    - cmake -DCMAKE_BUILD_TYPE=Coverage .. 
+    - make
+    # - make project1_coverage
+    - ctest
 
 
-after_success:
-    - codecov -t c376990f-2ad6-4f7b-bbdb-5378a52e295c -X gcov
+# after_success:
+#     - codecov -t c376990f-2ad6-4f7b-bbdb-5378a52e295c -X gcov
