@@ -44,9 +44,9 @@ TEST(BacteriaTest, bacteria_also_dies_with_partially_unsitisfied)
     int health = 100;
     int ironNeed = 10;
     int nitrogeniumNeed = 10;
-    
+
     core::Bacteria bac("Bac 1", health);
-    bac .needs(Minerals::Fe, ironNeed)
+    bac.needs(Minerals::Fe, ironNeed)
         .needs(Minerals::N, nitrogeniumNeed);
 
     core::Substract poorSubstract;
@@ -63,13 +63,13 @@ TEST(BacteriaTest, bacteria_is_happy_if_gets_everything_it_needs)
     int nitrogeniumNeed = 10;
 
     core::Bacteria bac("Bac 1", health);
-    bac .needs(Minerals::Fe, ironNeed)
+    bac.needs(Minerals::Fe, ironNeed)
         .needs(Minerals::N, nitrogeniumNeed);
 
     core::Substract substract;
     substract.withFe(ironNeed)
-            .withN(nitrogeniumNeed * 2)
-            .withNa(200);
+        .withN(nitrogeniumNeed * 2)
+        .withNa(200);
 
     bac.activate(substract);
     ASSERT_EQ(bac.getHealth(), health);
