@@ -2,4 +2,4 @@ add_executable(farmer
     main.cpp 
 )
 
-include_directories(${CMAKE_HOME_DIRECTORY}/src/include)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
