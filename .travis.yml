@@ -57,17 +57,12 @@ install:
 
 script:
     ############################################################################
-    # Download gtest
+    # Build main and tests
     ############################################################################
     - echo "Downloading gtest"
     - mkdir -p external/include
     - cd external/include
     - git clone https://github.com/google/googletest.git
-
-script:
-    ############################################################################
-    # Build main and tests
-    ############################################################################
     - mkdir -p build
     - cd build
     # - cmake -DCMAKE_BUILD_TYPE=Coverage .. 
