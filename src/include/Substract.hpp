@@ -1,7 +1,5 @@
 #pragma once
 
-#include <Inffectable.hpp>
-
 #include <vector>
 #include <iostream>
 
@@ -32,36 +30,35 @@ namespace core
 
     using nutrients::quantity_t;
 
-    class Organism : public Inffectable
+    class Substract
     {
 
     public:
-        Organism() : Inffectable(),
-                     m_minerals(static_cast<int>(nutrients::Minerals::COUNT)),
+        Substract() : m_minerals(static_cast<int>(nutrients::Minerals::COUNT)),
                      m_vitamins(static_cast<int>(nutrients::Vitamins::COUNT)){};
-        Organism(Organism &&o) : m_minerals(std::move(o.m_minerals)), m_vitamins(std::move(o.m_vitamins)) {}
-        ~Organism() = default;
-        Organism(const Organism& o) = delete;
+        Substract(Substract &&o) : m_minerals(std::move(o.m_minerals)), m_vitamins(std::move(o.m_vitamins)) {}
+        ~Substract() = default;
+        Substract(const Substract &o) = delete;
 
-        Organism &withK(quantity_t quantity)
+        Substract &withK(quantity_t quantity)
         {
             (*this)[nutrients::Minerals::K] = quantity;
             return *this;
         }
 
-        Organism &withNa(quantity_t quantity)
+        Substract &withNa(quantity_t quantity)
         {
             (*this)[nutrients::Minerals::Na] = quantity;
             return *this;
         }
 
-        Organism &withFe(quantity_t quantity)
+        Substract &withFe(quantity_t quantity)
         {
             (*this)[nutrients::Minerals::Fe] = quantity;
             return *this;
         }
 
-        Organism &withN(quantity_t quantity)
+        Substract &withN(quantity_t quantity)
         {
             (*this)[nutrients::Minerals::N] = quantity;
             return *this;

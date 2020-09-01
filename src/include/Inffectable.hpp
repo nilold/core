@@ -5,6 +5,8 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <unordered_map>
+#include <cstdlib>
 
 namespace core
 {
@@ -16,20 +18,34 @@ namespace core
         Inffectable() = default;
         ~Inffectable() = default;
         Inffectable(const Inffectable &) = delete;
-        Inffectable(Inffectable &&inff) : m_agents(std::move(inff.m_agents)) {}
+        Inffectable(Inffectable &&inff)
+            : m_agents(std::move(inff.m_agents)),
+              agentsResistance(std::move(inff.agentsResistance)) {}
 
-        bool tryInffection(AgentPtr a) noexcept;
-        void suffer() noexcept;
+        bool inffectWith(AgentPtr a) noexcept;
+
+    protected:
+        void addResistance(std::string agentType, int resistance)
+        {
+            agentsResistance[agentType] += resistance;
+        }
+        //TODO:: resistances should degrade with time
+
+    protected:
+        std::vector<AgentPtr> m_agents{};
 
     private:
         bool infecctionSucceeds(AgentPtr a) const noexcept;
-        std::vector<AgentPtr> m_agents{};
+        bool hasResistance(const AgentPtr agentType) const noexcept;
+
+    private:
+        std::unordered_map<std::string, int> agentsResistance;
     };
 } // namespace core
 
 namespace core
 {
-    bool Inffectable::tryInffection(AgentPtr a) noexcept
+    bool Inffectable::inffectWith(AgentPtr a) noexcept
     {
         bool success = infecctionSucceeds(a);
         if (success)
@@ -39,13 +55,14 @@ namespace core
         return success;
     }
 
-    bool Inffectable::infecctionSucceeds(AgentPtr a) const noexcept
+    bool Inffectable::infecctionSucceeds(AgentPtr agent) const noexcept
     {
-        return true;
+        int resistance = hasResistance(agent) ? agentsResistance.at(agent->type()) : 0;
+        return std::rand() > resistance;
     }
 
-    void Inffectable::suffer() noexcept
+    bool Inffectable::hasResistance(const AgentPtr agentType) const noexcept
     {
-        
+        return agentsResistance.find(agentType->type()) != agentsResistance.end();
     }
 } // namespace core

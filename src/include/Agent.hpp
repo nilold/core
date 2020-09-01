@@ -1,18 +1,11 @@
 #pragma once
 
-// #include <Organism.hpp>
 #include <string>
 #include <unordered_map>
 
 namespace core
 {
-    
-    // namespace nutrients
-    // {
-        class Minerals;
-        class quantity_t;
-    // } // namespace nutrients
-    class Organism;
+    class Substract;
 
     class Agent
     {
@@ -22,12 +15,11 @@ namespace core
         Agent(const Agent &) = delete;
         Agent(Agent &&a) : m_type(a.m_type) {}
 
-        // virtual Organism &needs(Minerals type, quantity_t quantity) = 0;
-        virtual void live(Organism &organism) = 0;
+        virtual void activate(Substract &Substract) = 0;
+        std::string type() const { return m_type; }
 
     protected:
         std::string m_type{};
         int m_health{};
-        // std::unordered_map<Minerals, quantity_t> m_needs;
     };
 } // namespace core

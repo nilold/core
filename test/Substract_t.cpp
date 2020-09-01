@@ -1,27 +1,27 @@
-#include <Organism.hpp>
+#include <Substract.hpp>
 
 #include <gtest/gtest.h>
 
-class OrganismTest : public ::testing::Test {};
+class SubstractTest : public ::testing::Test {};
 
-TEST(OrganismTest, take_quantity_with_zero_present_returns_0)
+TEST(SubstractTest, take_quantity_with_zero_present_returns_0)
 {
-    core::Organism o{};
+    core::Substract o{};
     EXPECT_EQ(o.takeNutrient(core::nutrients::Minerals::K, 10), 0);
 }
 
-TEST(OrganismTest, adding_quantity_of_type_increase_present_quantity)
+TEST(SubstractTest, adding_quantity_of_type_increase_present_quantity)
 {
-    core::Organism o{};
+    core::Substract o{};
     o.addNutrient(core::nutrients::Minerals::K, 60);
     EXPECT_EQ(o.getNutrient(core::nutrients::Minerals::K), 60);
     EXPECT_EQ(o.getNutrient(core::nutrients::Minerals::N), 0);
     EXPECT_EQ(o.getNutrient(core::nutrients::Minerals::Na), 0);
 }
 
-TEST(OrganismTest, get_quantity_reduces_present_quantity)
+TEST(SubstractTest, get_quantity_reduces_present_quantity)
 {
-    core::Organism o{};
+    core::Substract o{};
     o.withK(50).withFe(50).withNa(50);
     EXPECT_EQ(o.takeNutrient(core::nutrients::Minerals::K, 20), 20);
     EXPECT_EQ(o.getNutrient(core::nutrients::Minerals::K), 30);
@@ -34,9 +34,9 @@ TEST(OrganismTest, get_quantity_reduces_present_quantity)
 }
 
 
-TEST(OrganismTest, get_quantity_greater_than_present_returns_present)
+TEST(SubstractTest, get_quantity_greater_than_present_returns_present)
 {
-    core::Organism o{}; // organismo with zero nutrients
+    core::Substract o{}; // Substracto with zero nutrients
     o.withK(50).withFe(50).withNa(50);
 
     EXPECT_EQ(o.takeNutrient(core::nutrients::Minerals::K, 100), 50);

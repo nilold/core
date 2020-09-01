@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Agent.hpp>
-#include <Organism.hpp>
+#include <Substract.hpp>
 
 namespace core
 {
@@ -22,9 +22,9 @@ namespace core
             return *this;
         }
 
-        virtual void live(Organism &organism) override
+        virtual void activate(Substract &substract) override
         {
-            takeResources(organism);
+            takeResources(substract);
         }
 
         int getHealth() const
@@ -33,16 +33,17 @@ namespace core
         }
 
     private:
-        void takeResources(Organism &organism)
+        void takeResources(Substract &substract)
         {
             for (const auto &[mineral, required] : m_needs)
             {
                 if (required == 0)
                     continue;
-                auto aquired = organism.takeNutrient(mineral, required);
-                m_health *= static_cast<double>(aquired) / required;
+                auto acquired = substract.takeNutrient(mineral, required);
+                m_health *= static_cast<double>(acquired) / required;
             }
         }
+
         std::string m_name{};
         unsigned hunger{};
         std::unordered_map<nutrients::Minerals, nutrients::quantity_t> m_needs;

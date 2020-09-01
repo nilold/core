@@ -1,12 +1,16 @@
 #pragma once
+
+#include <Substract.hpp>
 #include <Crop.hpp>
 #include <Agent.hpp>
+
 #include <memory>
 
 namespace core
 {
     using CropPtr = std::shared_ptr<Crop>;
-    class Tile
+
+    class Tile: public Substract
     {
     public:
         Tile(unsigned x, unsigned y) : m_x{x}, m_y{y} {}
@@ -22,7 +26,7 @@ namespace core
 
         bool contamine(std::shared_ptr<Agent> agent)
         {
-            return m_crop ? m_crop->tryInffection(agent) : false;
+            return m_crop ? m_crop->inffectWith(agent) : false;
         }
 
     private:
