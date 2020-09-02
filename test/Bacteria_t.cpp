@@ -19,7 +19,7 @@ TEST(BacteriaTest, bacteria_dies_if_no_nutrients)
     ASSERT_EQ(bac.getHealth(), 100);
 
     core::Substract poorSubstract;
-    bac.activate(poorSubstract);
+    bac.cycle(poorSubstract);
     ASSERT_EQ(bac.getHealth(), 0);
 }
 
@@ -34,7 +34,7 @@ TEST(BacteriaTest, bacteria_perishes_if_not_enough_nutrients)
     core::Substract poorSubstract;
     poorSubstract.withFe(ironNeed / 2);
 
-    bac.activate(poorSubstract);
+    bac.cycle(poorSubstract);
     ASSERT_LT(bac.getHealth(), health);
     ASSERT_GT(bac.getHealth(), 0);
 }
@@ -52,7 +52,7 @@ TEST(BacteriaTest, bacteria_also_dies_with_partially_unsitisfied)
     core::Substract poorSubstract;
     poorSubstract.withFe(ironNeed);
 
-    bac.activate(poorSubstract);
+    bac.cycle(poorSubstract);
     ASSERT_EQ(bac.getHealth(), 0);
 }
 
@@ -71,6 +71,6 @@ TEST(BacteriaTest, bacteria_is_happy_if_gets_everything_it_needs)
         .withN(nitrogeniumNeed * 2)
         .withNa(200);
 
-    bac.activate(substract);
+    bac.cycle(substract);
     ASSERT_EQ(bac.getHealth(), health);
 }

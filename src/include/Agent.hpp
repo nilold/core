@@ -15,7 +15,7 @@ namespace core
         Agent(const Agent &) = delete;
         Agent(Agent &&a) : m_type(a.m_type) {}
 
-        virtual void activate(Substract &Substract) = 0;
+        virtual void cycle(Substract &Substract) = 0;
         std::string type() const { return m_type; }
 
     protected:

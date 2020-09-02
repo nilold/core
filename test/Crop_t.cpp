@@ -137,3 +137,35 @@ TEST(CropTest, crop_recovers_if_has_minerals_but_never_more_than_max)
 
     EXPECT_EQ(crop1.health(), 0);
 }
+
+TEST(CropTest, healthy_crop_develops_after_enough_cyles)
+{
+    int cropHealth = 100;
+    int maxCropHealth = 100;
+    int healthDevelopThreshold = 80;
+    int cyclesPerStage = 5;
+    Crop crop("Pequi", cropHealth, maxCropHealth, healthDevelopThreshold, cyclesPerStage);
+
+    EXPECT_EQ(crop.phenologicalStage(), 0);
+
+    for (int i = 0; i < cyclesPerStage; ++i)
+        crop.cycle();
+
+    EXPECT_EQ(crop.phenologicalStage(), 1);
+}
+
+TEST(CropTest, unhealthy_crop_wont_develop)
+{
+    int cropHealth = 50;
+    int maxCropHealth = 100;
+    int healthDevelopThreshold = 80;
+    int cyclesPerStage = 5;
+    Crop crop("Pequi", cropHealth, maxCropHealth, healthDevelopThreshold, cyclesPerStage);
+
+    EXPECT_EQ(crop.phenologicalStage(), 0);
+
+    for (int i = 0; i < 2 * cyclesPerStage; ++i)
+        crop.cycle();
+
+    EXPECT_EQ(crop.phenologicalStage(), 0);
+}

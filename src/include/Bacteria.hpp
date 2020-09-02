@@ -22,7 +22,7 @@ namespace core
             return *this;
         }
 
-        virtual void activate(Substract &substract) override
+        virtual void cycle(Substract &substract) override
         {
             takeResources(substract);
         }
