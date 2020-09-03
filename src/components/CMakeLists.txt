@@ -14,9 +14,9 @@ add_library(Field
     Tile.cpp
 )
 
-message(${CMAKE_SOURCE_DIR}/src/include)
-message(${CMAKE_HOME_DIRECTORY}/src/include)
+set(INCLUDES_DIR ${CMAKE_CURRENT_LIST_DIR}/../src/include)
+message(${INCLUDES_DIR})
 
-target_include_directories(Crops PRIVATE "${CMAKE_SOURCE_DIR}/src/include")
-target_include_directories(Agents PRIVATE "${CMAKE_SOURCE_DIR}/src/include")
-target_include_directories(Field PRIVATE "${CMAKE_SOURCE_DIR}/src/include")
+target_include_directories(Crops PRIVATE ${INCLUDES_DIR})
+target_include_directories(Agents PRIVATE ${INCLUDES_DIR})
+target_include_directories(Field PRIVATE ${INCLUDES_DIR})
