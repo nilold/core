@@ -6,10 +6,6 @@
 
 class CropTest : public ::testing::Test
 {
-protected:
-    void SetUp() override
-    {
-    }
 };
 
 using core::Bacteria;

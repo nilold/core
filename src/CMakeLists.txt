@@ -1,5 +1,7 @@
-add_executable(farmer 
-    main.cpp 
+add_executable(farmer
+    main.cpp
 )
 
-# include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
+target_include_directories(farmer PRIVATE ${CMAKE_HOME_DIRECTORY}/src/include)
+
+add_subdirectory(components)

@@ -25,11 +25,7 @@ namespace core
         bool inffectWith(AgentPtr a) noexcept;
 
     protected:
-        void addResistance(std::string agentType, int resistance)
-        {
-            agentsResistance[agentType] += resistance;
-        }
-        //TODO:: resistances should degrade with time
+        void addResistance(std::string agentType, int resistance);
 
     protected:
         std::vector<AgentPtr> m_agents{};
@@ -41,28 +37,4 @@ namespace core
     private:
         std::unordered_map<std::string, int> agentsResistance;
     };
-} // namespace core
-
-namespace core
-{
-    bool Inffectable::inffectWith(AgentPtr a) noexcept
-    {
-        bool success = infecctionSucceeds(a);
-        if (success)
-        {
-            m_agents.push_back(a);
-        }
-        return success;
-    }
-
-    bool Inffectable::infecctionSucceeds(AgentPtr agent) const noexcept
-    {
-        int resistance = hasResistance(agent) ? agentsResistance.at(agent->type()) : 0;
-        return std::rand() > resistance;
-    }
-
-    bool Inffectable::hasResistance(const AgentPtr agentType) const noexcept
-    {
-        return agentsResistance.find(agentType->type()) != agentsResistance.end();
-    }
 } // namespace core
