@@ -24,7 +24,7 @@ jobs:
 
     - name: Download gtest
       shell: bash
-      run: git clone https://github.com/google/googletest.git external/include
+      run: git clone https://github.com/google/googletest.git external/include/gtest
 
     - name: Configure CMake
       # Use a bash shell so we can use the same syntax for environment variable
