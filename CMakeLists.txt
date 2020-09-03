@@ -7,6 +7,6 @@ add_subdirectory(src)
 
 # Testing
 enable_testing()
-add_subdirectory(external/include)
+add_subdirectory(external/include/gtest)
 include(GoogleTest)
 add_subdirectory(test)

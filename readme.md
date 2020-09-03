@@ -1,5 +1,10 @@
 # Macintosh
-[![Build Status](https://travis-ci.org/nilold/farmer-core.svg?branch=master)](https://travis-ci.org/nilold/farmer-core)
+
+### Intalattion
+- Download gtest source
+  ```bash
+  git clone https://github.com/google/googletest.git external/include/gtest
+  ```
 
 ### TODOs General
  - CI is failing because of build system configuration
