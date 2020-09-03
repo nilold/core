@@ -15,7 +15,6 @@ add_library(Field
 )
 
 set(INCLUDES_DIR ${CMAKE_CURRENT_LIST_DIR}/../src/include)
-message(${INCLUDES_DIR})
 
 target_include_directories(Crops PRIVATE ${INCLUDES_DIR})
 target_include_directories(Agents PRIVATE ${INCLUDES_DIR})
