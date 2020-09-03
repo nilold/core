@@ -16,4 +16,4 @@ add_library(Field
 
 target_include_directories(Crops PRIVATE "${CMAKE_SOURCE_DIR}/src/include")
 target_include_directories(Agents PRIVATE "${CMAKE_SOURCE_DIR}/src/include")
-target_include_directories(Field PRIVATE "${CMAKE_SOURCE_DIR}/src/include")
+target_include_directories(Field PUBLIC "${CMAKE_SOURCE_DIR}/src/include")
