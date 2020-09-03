@@ -10,24 +10,20 @@ namespace core
 {
     using CropPtr = std::shared_ptr<Crop>;
 
-    class Tile: public Substract
+    class Tile : public Substract
     {
     public:
-        Tile(unsigned x, unsigned y) : m_x{x}, m_y{y} {}
+        Tile(unsigned x, unsigned y);
         ~Tile() = default;
         Tile(const Tile &) = delete;
-        Tile(Tile &&tile) : m_x(tile.m_x), m_y(tile.m_y), m_crop(tile.m_crop) {}
+        Tile(Tile &&tile);
 
         Tile &operator=(Tile &o) = delete;
         Tile &operator=(Tile &&o) = default;
 
-        void setCrop(CropPtr &crop) { m_crop = crop; }
-        CropPtr getCrop() { return m_crop; }
-
-        bool contamine(std::shared_ptr<Agent> agent)
-        {
-            return m_crop ? m_crop->inffectWith(agent) : false;
-        }
+        void setCrop(CropPtr &crop);
+        CropPtr getCrop() const;
+        bool contamine(std::shared_ptr<Agent> agent);
 
     private:
         unsigned m_x, m_y;

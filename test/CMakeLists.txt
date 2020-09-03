@@ -10,6 +10,7 @@ add_executable(Bacteria_t Bacteria_t.cpp)
 target_link_libraries(Bacteria_t
     PUBLIC
     gtest_main
+    Agents
 )
 target_include_directories(Bacteria_t PRIVATE ${CMAKE_HOME_DIRECTORY}/src/include)
 
@@ -18,6 +19,7 @@ target_link_libraries(Crop_t
     PUBLIC
     gtest_main
     Crops
+    Agents
 )
 
 target_include_directories(Crop_t PRIVATE ${CMAKE_HOME_DIRECTORY}/src/include)
