@@ -3,6 +3,8 @@ project(farmer-core)
 
 set(CMAKE_CXX_STANDARD 20)
 
+set(INCLUDES_DIR ${CMAKE_CURRENT_LIST_DIR}/src/include)
+
 add_subdirectory(src)
 
 # Testing
