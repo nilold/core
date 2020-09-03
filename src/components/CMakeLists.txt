@@ -12,6 +12,7 @@ add_library(Agents
 add_library(Field
     STATIC
     Tile.cpp
+    "${CMAKE_SOURCE_DIR}/src/include/Tile.hpp"
 )
 
 target_include_directories(Crops PRIVATE "${CMAKE_SOURCE_DIR}/src/include")
