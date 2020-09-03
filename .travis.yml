@@ -20,8 +20,8 @@ matrix:
       addons:
        apt:
         packages:
-        - g++
-        - clang
+        - g++7.5
+        # - clang
         # - valgrind
         # Misc
         # - python-yaml
@@ -29,10 +29,10 @@ matrix:
         # - libopencv-dev
         update: true
            #- gcov-4.9
-        # sources:
-        #   - ubuntu-toolchain-r-test
+        sources:
+          - ubuntu-toolchain-r-test
         #   - llvm-toolchain-precise-3.7
-    
+
 before_install:
     # Combine global build options with OS/compiler-dependent options
     # - export CMAKE_OPTIONS=${CMAKE_OPTIONS}" "${ENV_CMAKE_OPTIONS}
@@ -45,7 +45,7 @@ before_install:
 #     - ${CXX} --version
 #     - ${CXX} -v
 #     - sudo pip install codecov
-    
+
     # Download and install recent cmake
     - |
       if [[ ${TRAVIS_OS_NAME} == "linux" ]]; then
@@ -66,8 +66,8 @@ script:
     - cd ../..
     - mkdir -p build
     - cd build
-    # - cmake -DCMAKE_BUILD_TYPE=Coverage .. 
-    - cmake .. 
+    # - cmake -DCMAKE_BUILD_TYPE=Coverage ..
+    - cmake ..
     - make
     # - make project1_coverage
     - ctest

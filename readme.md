@@ -1,4 +1,4 @@
-# Vita
+# Macintosh
 [![Build Status](https://travis-ci.org/nilold/farmer-core.svg?branch=master)](https://travis-ci.org/nilold/farmer-core)
 
 ### TODOs General
@@ -11,3 +11,4 @@
  - Considerations:
    - What does a field really represent in the game?
    - Tiles from different fields can contamine each other?
+ - Add DB: SQLite
