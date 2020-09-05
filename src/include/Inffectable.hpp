@@ -36,6 +36,7 @@ namespace core
     private:
         bool infecctionSucceeds(AgentPtr a) const noexcept;
         bool hasResistance(const AgentPtr agentType) const noexcept;
+        bool Inffectable::contains(AgentPtr agent) const noexcept;
 
     private:
         std::unordered_set<std::string> m_agentPhylums;

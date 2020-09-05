@@ -19,9 +19,14 @@ namespace core
         return success;
     }
 
+    bool Inffectable::contains(AgentPtr agent) const noexcept
+    {
+        return m_agentPhylums.find(agent->phylum()) != m_agentPhylums.end();
+    }
+
     bool Inffectable::infecctionSucceeds(AgentPtr agent) const noexcept
     {
-        if(m_agentPhylums.find(agent->phylum()) != m_agentPhylums.end())
+        if (contains(agent))
             return false;
 
         int resistance = hasResistance(agent) ? agentsResistance.at(agent->type()) : 0;
