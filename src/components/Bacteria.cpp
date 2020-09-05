@@ -35,6 +35,7 @@ namespace core
         {
             if (required == 0)
                 continue;
+
             auto acquired = substract.takeNutrient(mineral, required);
             m_health *= static_cast<double>(acquired) / required;
         }

@@ -39,7 +39,7 @@ namespace core
     void Crop::cycle()
     {
         develop();
-        cycleAgents();
+        cycleAgents(); // Thats the only place we deal with agents
         updateHealth();
     }
 
@@ -64,6 +64,7 @@ namespace core
     void Crop::cycleAgents()
     {
         std::vector<AgentPtr> deadAgents;
+
         for (auto agent : m_agents)
         {
             agent->cycle(*this);

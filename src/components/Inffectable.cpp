@@ -8,13 +8,13 @@ namespace core
         //TODO:: resistances should degrade with time
     }
 
-    bool Inffectable::inffectWith(AgentPtr a) noexcept
+    bool Inffectable::inffectWith(AgentPtr agent) noexcept
     {
-        bool success = infecctionSucceeds(a);
+        bool success = infecctionSucceeds(agent);
         if (success)
         {
-            m_agents.insert(a);
-            m_agentPhylums.insert(a->phylum());
+            m_agents.insert(agent);
+            m_agentPhylums.insert(agent->phylum());
         }
         return success;
     }
@@ -40,7 +40,6 @@ namespace core
 
     void Inffectable::removeAgent(AgentPtr agent)
     {
-        // static_cast<void>(std::remove(m_agents.begin(), m_agents.end(), agent));
         m_agents.erase(agent);
         m_agentPhylums.erase(agent->phylum());
     }
