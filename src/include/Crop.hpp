@@ -18,8 +18,10 @@ namespace core
             std::int_fast8_t cyclesPerStage = 10);
 
         Crop(const Crop &c) = delete;
-        Crop(Crop &&c);
+        Crop(Crop &&c) noexcept;
         ~Crop() = default;
+
+        Crop &operator=(Crop &&rhs) = default;
 
         void cycle();
         Crop &needs(nutrients::Minerals type, nutrients::quantity_t quantity);

@@ -1,12 +1,19 @@
 #include <Tile.hpp>
+#include <Crop.hpp>
 
 namespace core
 {
-    Tile::Tile(unsigned x, unsigned y) : m_x{x}, m_y{y} {}
-    Tile::Tile::Tile(Tile &&tile) : m_x(tile.m_x), m_y(tile.m_y), m_crop(tile.m_crop) {}
+    // Tile::Tile::Tile(Tile &&tile) : m_crop(tile.m_crop) {}
 
-    void Tile::Tile::setCrop(CropPtr &crop) { m_crop = crop; }
+    void Tile::Tile::setCrop(CropPtr crop) { m_crop = crop; }
     CropPtr Tile::getCrop() const { return m_crop; }
+
+    Tile &Tile::operator=(Tile &&rhs) noexcept
+    {
+        Substract::operator=(std::move(rhs));
+        m_crop = std::move(rhs.m_crop);
+        return *this;
+    }
 
     bool Tile::contamine(std::shared_ptr<Agent> agent)
     {

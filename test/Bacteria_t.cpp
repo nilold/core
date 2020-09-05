@@ -74,3 +74,25 @@ TEST(BacteriaTest, bacteria_is_happy_if_gets_everything_it_needs)
     bac.cycle(substract);
     ASSERT_EQ(bac.getHealth(), health);
 }
+
+TEST(BacteriaTest, bacteria_can_make_a_independent_copy_itself)
+{
+    int health = 100;
+    int ironNeed = 10;
+    int nitrogeniumNeed = 10;
+
+    core::Bacteria bac("Bac 1", health);
+    bac.needs(Minerals::Fe, ironNeed)
+        .needs(Minerals::N, nitrogeniumNeed);
+
+    auto bacCpy = std::dynamic_pointer_cast<core::Bacteria>(bac.selfCopy());
+
+    EXPECT_EQ(bacCpy->getHealth(), health);
+
+    core::Substract substract;
+    bac.cycle(substract);
+    bac.cycle(substract);
+    bac.cycle(substract);
+
+    EXPECT_EQ(bacCpy->getHealth(), health);
+}

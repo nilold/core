@@ -13,20 +13,19 @@ namespace core
     class Tile : public Substract
     {
     public:
-        Tile(unsigned x, unsigned y);
+        Tile() = default;
         ~Tile() = default;
         Tile(const Tile &) = delete;
-        Tile(Tile &&tile);
+        Tile(Tile &&tile) = default;
 
-        Tile &operator=(Tile &o) = delete;
-        Tile &operator=(Tile &&o) = default;
+        Tile &operator=(Tile &rhs) = delete;
+        Tile &operator=(Tile &&rhs) noexcept;
 
-        void setCrop(CropPtr &crop);
+        void setCrop(CropPtr crop);
         CropPtr getCrop() const;
         bool contamine(std::shared_ptr<Agent> agent);
 
     private:
-        unsigned m_x, m_y;
         CropPtr m_crop;
     };
 } // namespace core

@@ -6,6 +6,7 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
+#include <unordered_set>
 #include <cstdlib>
 
 namespace core
@@ -18,11 +19,13 @@ namespace core
         Inffectable() = default;
         ~Inffectable() = default;
         Inffectable(const Inffectable &) = delete;
-        Inffectable(Inffectable &&inff)
-            : m_agents(std::move(inff.m_agents)),
-              agentsResistance(std::move(inff.agentsResistance)) {}
+        Inffectable(Inffectable &&rhs)
+            : m_agents(std::move(rhs.m_agents)),
+              m_agentPhylums(std::move(rhs.m_agentPhylums)),
+              agentsResistance(std::move(rhs.agentsResistance)) {}
 
         bool inffectWith(AgentPtr a) noexcept;
+        std::vector<AgentPtr> getAgents() { return m_agents; };
 
     protected:
         void addResistance(std::string agentType, int resistance);
@@ -35,6 +38,7 @@ namespace core
         bool hasResistance(const AgentPtr agentType) const noexcept;
 
     private:
+        std::unordered_set<std::string> m_agentPhylums;
         std::unordered_map<std::string, int> agentsResistance;
     };
 } // namespace core

@@ -11,6 +11,7 @@ add_library(Agents
 
 add_library(Field
     STATIC
+    Field.cpp
     Tile.cpp
 )
 

@@ -19,12 +19,10 @@ namespace core
         Bacteria &needs(nutrients::Minerals type, nutrients::quantity_t quantity);
         void cycle(Substract &substract) override;
         int getHealth() const;
+        std::shared_ptr<Agent> selfCopy() const override;
 
     private:
-        void takeResources(Substract &substract);
-
-        std::string m_name{};
-        unsigned hunger{};
         std::unordered_map<nutrients::Minerals, nutrients::quantity_t> m_needs;
+        void takeResources(Substract &substract);
     };
 } // namespace core

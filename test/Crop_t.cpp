@@ -93,6 +93,25 @@ TEST(CropTest, but_if_it_doesnt_need_mineral_its_ok)
     EXPECT_EQ(crop1.health(), cropHealth);
 }
 
+TEST(CropTest, crop_wont_get_inffected_twice_with_same_agent_specie)
+{
+    auto bac1 = std::make_shared<Bacteria>("Cyanobacteria");
+    auto bac2 = std::make_shared<Bacteria>("Thermodesulfobacteria");
+    auto bac3 = std::make_shared<Bacteria>("Cyanobacteria");
+
+    Crop crop1("Pequi", 100);
+    crop1.inffectWith(bac1);
+    crop1.inffectWith(bac2);
+    crop1.inffectWith(bac3);
+
+    EXPECT_EQ(crop1.getAgents().size(), 2);
+}
+
+TEST(CropTest, crop_getInfected_with_previous_specie_if_it_has_died)
+{
+    //TODO
+}
+
 TEST(CropTest, crop_recovers_if_has_minerals_but_never_more_than_max)
 {
     auto bac1 = std::make_shared<Bacteria>("bac1");

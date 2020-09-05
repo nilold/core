@@ -35,10 +35,12 @@ namespace core
 
     public:
         Substract() : m_minerals(static_cast<int>(nutrients::Minerals::COUNT)),
-                     m_vitamins(static_cast<int>(nutrients::Vitamins::COUNT)){};
+                      m_vitamins(static_cast<int>(nutrients::Vitamins::COUNT)){};
         Substract(Substract &&o) : m_minerals(std::move(o.m_minerals)), m_vitamins(std::move(o.m_vitamins)) {}
         ~Substract() = default;
         Substract(const Substract &o) = delete;
+
+        Substract &operator=(Substract &&rhs) = default;
 
         Substract &withK(quantity_t quantity)
         {

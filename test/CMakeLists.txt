@@ -23,6 +23,17 @@ target_link_libraries(Crop_t
 )
 target_include_directories(Crop_t PRIVATE ${INCLUDES_DIR})
 
+add_executable(Field_t Field_t.cpp)
+target_link_libraries(Field_t
+    PUBLIC
+    gtest_main
+    Field
+    Crops
+    Agents
+)
+target_include_directories(Field_t PRIVATE ${INCLUDES_DIR})
+
 gtest_discover_tests(Substract_t TEST_LIST SubstractTests)
 gtest_discover_tests(Bacteria_t TEST_LIST BacteriaTests)
 gtest_discover_tests(Crop_t TEST_LIST CropTests)
+gtest_discover_tests(Field_t TEST_LIST FieldTests)

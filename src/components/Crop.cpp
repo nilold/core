@@ -17,7 +17,7 @@ namespace core
     {
     }
 
-    Crop::Crop(Crop &&c) // TODO: is this right?
+    Crop::Crop(Crop &&c) noexcept
         : Substract(std::move(c)),
           Inffectable(std::move(c)),
           m_specie(c.m_specie),

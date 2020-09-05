@@ -2,8 +2,8 @@
 
 namespace core
 {
-    Bacteria::Bacteria(std::string name, int health) : Agent("Bacteria", health), m_name(name) {}
-    Bacteria::Bacteria(Bacteria &&o) : Agent(std::move(o)), m_name(o.m_name) {}
+    Bacteria::Bacteria(std::string phylum, int health) : Agent(AGENT_TYPE, phylum, health) {}
+    Bacteria::Bacteria(Bacteria &&o) : Agent(std::move(o)) {}
 
     Bacteria &Bacteria::needs(nutrients::Minerals type, nutrients::quantity_t quantity)
     {
@@ -19,6 +19,14 @@ namespace core
     int Bacteria::getHealth() const
     {
         return m_health;
+    }
+
+    std::shared_ptr<Agent> Bacteria::selfCopy() const
+    {
+        //should health be restored on copy?
+        auto cpy = std::make_shared<Bacteria>(m_phylum, m_health);
+        cpy->m_needs = m_needs;
+        return cpy;
     }
 
     void Bacteria::takeResources(Substract &substract)

@@ -14,12 +14,16 @@ namespace core
         if (success)
         {
             m_agents.push_back(a);
+            m_agentPhylums.insert(a->phylum());
         }
         return success;
     }
 
     bool Inffectable::infecctionSucceeds(AgentPtr agent) const noexcept
     {
+        if(m_agentPhylums.contains(agent->phylum()))
+            return false;
+
         int resistance = hasResistance(agent) ? agentsResistance.at(agent->type()) : 0;
         return std::rand() > resistance;
     }
