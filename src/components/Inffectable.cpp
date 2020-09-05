@@ -21,7 +21,7 @@ namespace core
 
     bool Inffectable::infecctionSucceeds(AgentPtr agent) const noexcept
     {
-        if(m_agentPhylums.contains(agent->phylum()))
+        if(m_agentPhylums.find(agent->phylum()) != m_agentPhylums.end())
             return false;
 
         int resistance = hasResistance(agent) ? agentsResistance.at(agent->type()) : 0;
