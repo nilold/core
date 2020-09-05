@@ -25,13 +25,14 @@ namespace core
               agentsResistance(std::move(rhs.agentsResistance)) {}
 
         bool inffectWith(AgentPtr a) noexcept;
-        std::vector<AgentPtr> getAgents() { return m_agents; };
+        std::unordered_set<AgentPtr> getAgents() { return m_agents; };
 
     protected:
         void addResistance(std::string agentType, int resistance);
+        void removeAgent(AgentPtr agent);
 
     protected:
-        std::vector<AgentPtr> m_agents{};
+        std::unordered_set<AgentPtr> m_agents{};
 
     private:
         bool infecctionSucceeds(AgentPtr a) const noexcept;

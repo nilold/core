@@ -20,7 +20,6 @@ namespace core
         Crop(const Crop &c) = delete;
         Crop(Crop &&c) noexcept;
         ~Crop() = default;
-
         Crop &operator=(Crop &&rhs) = default;
 
         void cycle();

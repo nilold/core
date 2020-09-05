@@ -13,7 +13,7 @@ namespace core
         bool success = infecctionSucceeds(a);
         if (success)
         {
-            m_agents.push_back(a);
+            m_agents.insert(a);
             m_agentPhylums.insert(a->phylum());
         }
         return success;
@@ -36,5 +36,12 @@ namespace core
     bool Inffectable::hasResistance(const AgentPtr agentType) const noexcept
     {
         return agentsResistance.find(agentType->type()) != agentsResistance.end();
+    }
+
+    void Inffectable::removeAgent(AgentPtr agent)
+    {
+        // static_cast<void>(std::remove(m_agents.begin(), m_agents.end(), agent));
+        m_agents.erase(agent);
+        m_agentPhylums.erase(agent->phylum());
     }
 } // namespace core

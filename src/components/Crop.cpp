@@ -63,10 +63,16 @@ namespace core
 
     void Crop::cycleAgents()
     {
+        std::vector<AgentPtr> deadAgents;
         for (auto agent : m_agents)
         {
             agent->cycle(*this);
+            if(agent->health() <= 0)
+                deadAgents.push_back(agent);
         }
+
+        for(auto deadAgent: deadAgents)
+            removeAgent(deadAgent);
     }
 
     void Crop::updateHealth()
